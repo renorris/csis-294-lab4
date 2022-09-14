@@ -1,8 +1,8 @@
 // Game Grid
 // Author: Reese Norris
-// CSIS-294 Lab 3
+// CSIS-294 Lab 4
 
-package com.reese.csis294.lab3;
+package com.reese.csis294.lab4;
 
 import java.security.SecureRandom;
 import java.util.Scanner;

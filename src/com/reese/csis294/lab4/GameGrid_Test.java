@@ -2,7 +2,7 @@
 // Author: Reese Norris
 // CSIS-294 Lab 3
 
-package com.reese.csis294.lab3;
+package com.reese.csis294.lab4;
 
 public class GameGrid_Test {
 
