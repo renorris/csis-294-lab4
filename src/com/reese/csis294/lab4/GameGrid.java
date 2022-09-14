@@ -4,7 +4,6 @@
 
 package com.reese.csis294.lab4;
 
-import java.io.CharArrayReader;
 import java.security.SecureRandom;
 import java.util.Scanner;
 
