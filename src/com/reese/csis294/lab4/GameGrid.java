@@ -59,7 +59,7 @@ public class GameGrid {
     }
 
     /**
-     * Renders an ASCII grid of a GameGrid's 2D array's elements including a player's location and a border
+     * Renders an ASCII grid of a GameGrid's 2D array's elements including a player's location
      * @param grid The grid
      * @param playerYPos The row of the player
      * @param playerXPos The column of the player
@@ -70,12 +70,12 @@ public class GameGrid {
         int gridWidth = grid[1].length;
 
         StringBuilder result = new StringBuilder();
-        result.append("/ ");
-        result.append("---".repeat(gridWidth));
-        result.append(" \\\n");
+        result.append(" ");
+        result.append("   ".repeat(gridWidth));
+        result.append(" \n");
 
         for (int row = 0; row < grid[0].length; row++) {
-            result.append("| ");
+            result.append(" ");
             for (int column = 0; column < grid[1].length; column++) {
                 if (playerYPos == row && playerXPos == column) {
                     result.append(" X ");
@@ -84,12 +84,11 @@ public class GameGrid {
                     result.append(" " + grid[row][column] + " ");
                 }
             }
-            result.append(" |\n");
+            result.append(" \n");
         }
 
-        result.append("\\ ");
-        result.append("---".repeat(gridWidth));
-        result.append(" /");
+        result.append("  ");
+        result.append("   ".repeat(gridWidth));
 
         return result.toString();
     }
