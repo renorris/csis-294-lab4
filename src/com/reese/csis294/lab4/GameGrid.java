@@ -4,14 +4,17 @@
 
 package com.reese.csis294.lab4;
 
+import java.io.CharArrayReader;
 import java.security.SecureRandom;
 import java.util.Scanner;
 
 public class GameGrid {
 
-    final int[][] grid;
-    int playerXPos;
-    int playerYPos;
+    private final int[][] grid;
+    private final LinkedList playerHistory;
+    private int totalMoves;
+    private int playerYPos;
+    private int playerXPos;
 
     /**
      * Builds and configures a game grid
@@ -22,8 +25,10 @@ public class GameGrid {
 
     public GameGrid(int rows, int columns, int wallChance) {
         this.grid = generateGrid(rows, columns, wallChance);
-        this.playerXPos = 0;
+        this.totalMoves = 0;
         this.playerYPos = 0;
+        this.playerXPos = 0;
+        this.playerHistory = new LinkedList(this.playerYPos, this.playerXPos);
     }
 
     /**
@@ -94,6 +99,27 @@ public class GameGrid {
     }
 
     /**
+     * Writes values from a player history linked list onto a grid to display move history
+     * @param grid The grid to modify
+     * @param playerHistory The linked list from which to reference moves
+     * @return A new grid with player history elements valued as "5"'s
+     */
+
+    private int[][] getPlayerHistoryGrid(int[][] grid, LinkedList playerHistory) {
+        Node tempNode;
+
+        while (true) {
+            tempNode = playerHistory.removeHeadNode();
+            if (tempNode == null) {
+                break;
+            }
+            grid[tempNode.yPos][tempNode.xPos] = 5;
+        }
+
+        return grid;
+    }
+
+    /**
      * Runs a game session
      */
 
@@ -102,26 +128,33 @@ public class GameGrid {
         String choice;
 
         while (true) {
-            // "Clear" console
-            System.out.println("\n".repeat(this.grid[0].length * 5));
-
             // Print game header
             System.out.println("Enter 'r' to go right; 'd' to go down.");
 
-            // Print rendered grid
+            // Render a grid then print
             System.out.println(renderGrid(this.grid, this.playerYPos, this.playerXPos));
 
-            // Print game status and exit if required
+            // If game finished, print result & history grid then exit
             if (this.grid[this.playerYPos][this.playerXPos] == 1) {
                 System.out.println("You lost!");
+                System.out.println("You finished in " + this.totalMoves + " moves.");
+                System.out.println("Here's your history:");
+                System.out.println(
+                        renderGrid(getPlayerHistoryGrid(this.grid, this.playerHistory), this.playerYPos, this.playerXPos)
+                );
                 break;
             }
             if (this.playerYPos == 9 || this.playerXPos == 9) {
                 System.out.println("You won!");
+                System.out.println("You finished in " + this.totalMoves + " moves.");
+                System.out.println("Here's your history:");
+                System.out.println(
+                        renderGrid(getPlayerHistoryGrid(this.grid, this.playerHistory), this.playerYPos, this.playerXPos)
+                );
                 break;
             }
 
-            // Get input
+            // Player choice
             input_loop:
             while (true) {
                 System.out.print("> ");
@@ -137,6 +170,12 @@ public class GameGrid {
                         System.out.println("Try again!");
                 }
             }
+
+            // Write current location to the linked list
+            this.playerHistory.addHeadNode(this.playerYPos, this.playerXPos);
+
+            // Increment total moves
+            this.totalMoves++;
         }
     }
 }

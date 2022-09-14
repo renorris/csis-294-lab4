@@ -1,6 +1,6 @@
 // Game Grid Test
 // Author: Reese Norris
-// CSIS-294 Lab 3
+// CSIS-294 Lab 4
 
 package com.reese.csis294.lab4;
 
