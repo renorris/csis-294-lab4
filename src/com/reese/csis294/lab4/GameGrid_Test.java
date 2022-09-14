@@ -12,6 +12,9 @@ public class GameGrid_Test {
         // distributed across GameGrid in its constructor and
         // other utility methods
 
+        // "Updating run method in GameGrid class" changes
+        // can be found in both GameGrid.run() and GameGrid.getPlayerHistoryGrid()
+
         GameGrid gameGrid = new GameGrid(10, 10, 20);
         gameGrid.run();
     }
