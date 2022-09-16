@@ -117,7 +117,7 @@ public class GameGrid {
                 System.out.println("You lost!");
                 break;
             }
-            if (this.playerYPos == 9 || this.playerXPos == 9) {
+            if (this.playerYPos == (this.grid[0].length - 1) || this.playerXPos == (this.grid[1].length - 1)) {
                 System.out.println("You won!");
                 break;
             }
