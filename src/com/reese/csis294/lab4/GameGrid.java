@@ -143,7 +143,7 @@ public class GameGrid {
                 );
                 break;
             }
-            if (this.playerYPos == 9 || this.playerXPos == 9) {
+            if (this.playerYPos == (this.grid[0].length - 1) || this.playerXPos == (this.grid[1].length - 1)) {
                 System.out.println("You won!");
                 System.out.println("You finished in " + this.totalMoves + " moves.");
                 System.out.println("Here's your history:");
